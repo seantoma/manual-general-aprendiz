@@ -212,6 +212,11 @@
             box-shadow: 0 4px 12px rgba(224, 122, 95, 0.2);
         }
 
+        .glass-card.accent .card-icon {
+            background: linear-gradient(135deg, var(--accent), #5E9ABF);
+            box-shadow: 0 4px 12px rgba(69, 123, 157, 0.2);
+        }
+
         .glass-card h2 {
             font-family: var(--font-heading);
             font-size: 1.5rem;
@@ -247,6 +252,12 @@
         .glass-card.orange:hover .btn-elegant {
             background: var(--secondary);
             border-color: var(--secondary);
+            color: white;
+        }
+
+        .glass-card.accent:hover .btn-elegant {
+            background: var(--accent);
+            border-color: var(--accent);
             color: white;
         }
 
@@ -491,6 +502,15 @@
             <h2>Recursos y Formatos</h2>
             <p>Repositorio central de bitácoras, actas y documentación técnica oficial.</p>
             <div class="btn-elegant">Ver Archivos</div>
+        </a>
+
+        <!-- CSF Info -->
+        <a href="https://serviciosfinancierosena.blogspot.com/p/etapa-productiva.html" target="_blank" rel="noopener"
+            class="glass-card accent">
+            <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+            <h2>CSF Etapa productiva mas informacion</h2>
+            <p>Consulta términos, condiciones y programación específica del Centro de Servicios Financieros.</p>
+            <div class="btn-elegant">Más Información</div>
         </a>
     </main>
 
