@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENA | Calculadora de Tiempos EP</title>
+    <meta name="description" content="Herramienta para proyectar fechas de cierre de Etapa Productiva SENA.">
+    <meta name="keywords" content="SENA, Calculadora, Fechas, Aprendiz, Etapa Productiva">
+    <link rel="icon" href="https://img.icons8.com/?size=48&id=rEkHtgGbERQY&format=png" type="image/png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --primary: #2D6A4F;
+            --primary-light: #52B788;
+            --primary-lighter: #B7E4C7;
+            --primary-bg: rgba(45, 106, 79, 0.08);
+            --secondary: #E07A5F;
+            --secondary-light: #F2A68B;
+            --accent: #457B9D;
+            --bg-main: #FAFAF5;
+            --bg-card: #FFFFFF;
+            --bg-header: #1B4332;
+            --text-main: #2D3436;
+            --text-muted: #636E72;
+            --border: #E8E8E0;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 50px;
+
+            /* Legacy aliases */
+            --sena-verde: var(--primary);
+            --sena-azul: var(--accent);
+            --neon-cyan: var(--accent);
+            --neon-green: var(--primary);
+            --neon-magenta: var(--secondary);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-main);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin: 2rem;
+            position: relative;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-header) 0%, #2D6A4F 50%, #40916C 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin: 0;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .header p {
+            font-family: var(--font-body);
+            margin-top: 0.8rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            color: white;
+            transform: translateY(-50%) translateX(-3px);
+        }
+
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+            font-family: var(--font-heading);
+        }
+
+        input[type="date"],
+        select {
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--bg-main);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            color: var(--text-main);
+            width: 100%;
+            max-width: 400px;
+            transition: 0.3s;
+            font-family: var(--font-body);
+        }
+
+        input[type="date"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
+        }
+
+        .btn-calc {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: var(--font-body);
+            margin-top: 1.5rem;
+        }
+
+        .btn-calc:hover {
+            background: #245640;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.2);
+        }
+
+        .results {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.3rem;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--bg-card);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            transition: 0.3s;
+            z-index: 2;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background: var(--primary);
+            box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.15);
+        }
+
+        .card-result {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: 0.3s;
+            cursor: pointer;
+            border-left: 3px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-result:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-left-color: var(--primary);
+        }
+
+        .card-result h3 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin: 0.5rem 0;
+        }
+
+        .card-result p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--primary-bg);
+            border: 1px solid var(--primary-lighter);
+            color: var(--primary);
+            padding: 0.25rem 0.7rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-tag {
+            background: rgba(224, 122, 95, 0.08);
+            color: var(--secondary);
+            border: 1px solid rgba(224, 122, 95, 0.2);
+            padding: 0.25rem 0.7rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 7rem;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 100;
+            font-size: 1.2rem;
+            border: none;
+        }
+
+        .fab:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(45, 106, 79, 0.4);
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: var(--text-main);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            white-space: nowrap;
+        }
+
+        .timeline-item:hover .tooltip {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .back-btn {
+                position: static;
+                transform: none;
+                margin-bottom: 1rem;
+                justify-content: center;
+            }
+
+            .container {
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver</a>
+            <h1><i class="fas fa-calendar-alt"></i> Calculadora de Etapa Productiva</h1>
+            <p>Planifica tu éxito: Genera tu cronograma de entregas al instante</p>
+        </div>
+
+        <div class="content">
+            <div class="input-group">
+                <label for="programType">Tipo de Programa:</label>
+                <select id="programType">
+                    <option value="tecnico">Programa Técnico (6 Meses)</option>
+                    <option value="tecnologo">Programa Tecnólogo (9 Meses)</option>
+                </select>
+                <br>
+                <label for="startDate">¿Cuándo inicia tu Etapa Productiva?</label>
+                <input type="date" id="startDate">
+                <br>
+                <button class="btn-calc" onclick="calculateDates()">
+                    <i class="fas fa-magic"></i> Generar Mi Cronograma
+                </button>
+            </div>
+
+            <div id="resultsArea" class="results">
+                <h3
+                    style="color: var(--primary); text-align: center; margin-bottom: 2rem; font-family: var(--font-heading);">
+                    Tu Ruta Personalizada</h3>
+                <div class="timeline" id="timelineContainer">
+                    <!-- JS will populate this -->
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn-calc" style="background: var(--accent);" onclick="window.print()">
+                        <i class="fas fa-print"></i> Imprimir / Guardar PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fab" onclick="showHelp()">
+        <i class="fas fa-question"></i>
+    </div>
+
+    <!-- MAYA AI AGENT -->
+    <button id="ai-fab"><i class="fas fa-paw"></i></button>
+    <div id="chat-window" class="chat-window hidden">
+        <div class="chat-header">
+            <span><b>MAYA Assistant</b> AI</span>
+            <button id="close-chat" class="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="msg bot">¡Guau! 🐾 ¡Hola, Aprendiz! Soy <b>MAYA</b>, tu Border Collie guardiana. ¿Te ayudo con
+                las
+                fechas?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Pregunta a Maya...">
+            <button id="send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        function calculateDates() {
+            const dateInput = document.getElementById('startDate').value;
+            const type = document.getElementById('programType').value;
+
+            if (!dateInput) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¡Espera!',
+                    text: 'Por favor selecciona una fecha de inicio.',
+                    confirmButtonColor: '#2D6A4F'
+                });
+                return;
+            }
+
+            const start = new Date(dateInput);
+            // Adjust for timezone offset
+            const userTimezoneOffset = start.getTimezoneOffset() * 60000;
+            const startDate = new Date(start.getTime() + userTimezoneOffset);
+
+            const timeline = document.getElementById('timelineContainer');
+            timeline.innerHTML = ''; // Clear previous
+
+            // Helper to add days
+            const addDays = (date, days) => {
+                const result = new Date(date);
+                result.setDate(result.getDate() + days);
+                return result;
+            };
+
+            // Helper to add months
+            const addMonths = (date, months) => {
+                const result = new Date(date);
+                result.setMonth(result.getMonth() + months);
+                return result;
+            };
+
+            let milestones = [];
+
+            // Common Milestones
+            milestones.push({
+                title: "Inicio de Etapa Productiva",
+                date: startDate,
+                desc: "Tu primer día. Asegúrate de estar afiliado a la ARL.",
+                doc: "F-165 Selección Alternativa",
+                icon: "fa-flag-checkered",
+                color: "var(--secondary)"
+            });
+
+            milestones.push({
+                title: "Visita de Concertación",
+                date: addDays(startDate, 15),
+                desc: "Tu instructor te visitará para acordar el plan de trabajo.",
+                doc: "F-023 Concertación",
+                icon: "fa-handshake",
+                color: "var(--primary)"
+            });
+
+            // Logic for Bitácoras
+            if (type === 'tecnologo') {
+                for (let i = 1; i <= 9; i++) {
+                    milestones.push({
+                        title: `Entrega Bitácora Mes ${i}`,
+                        date: addMonths(startDate, i),
+                        desc: `Reporte mensual número ${i} de 9.`,
+                        doc: `F-147 Bitácora ${i}`,
+                        icon: "fa-file-alt",
+                        color: "var(--accent)"
+                    });
+                }
+
+                milestones.push({
+                    title: "Visita Parcial (Seguimiento)",
+                    date: addMonths(startDate, 4),
+                    desc: "Evaluación de medio término. Identifica mejoras.",
+                    doc: "F-023 Parcial",
+                    icon: "fa-chart-line",
+                    color: "var(--primary)"
+                });
+
+                milestones.push({
+                    title: "Visita Final y Cierre",
+                    date: addDays(addMonths(startDate, 9), 5),
+                    desc: "Evaluación final para certificar tu etapa.",
+                    doc: "F-023 Final + Paz y Salvo",
+                    icon: "fa-graduation-cap",
+                    color: "var(--secondary)"
+                });
+
+            } else {
+                for (let i = 1; i <= 6; i++) {
+                    milestones.push({
+                        title: `Entrega Bitácora Mes ${i}`,
+                        date: addMonths(startDate, i),
+                        desc: `Reporte mensual número ${i}.`,
+                        doc: `F-147 Bitácora ${i}`,
+                        icon: "fa-file-alt",
+                        color: "var(--accent)"
+                    });
+                }
+                milestones.push({
+                    title: "Visita Parcial (Seguimiento)",
+                    date: addMonths(startDate, 3),
+                    desc: "Evaluación de medio término. Identifica mejoras.",
+                    doc: "F-023 Parcial",
+                    icon: "fa-chart-line",
+                    color: "var(--primary)"
+                });
+
+                milestones.push({
+                    title: "Visita Final y Cierre",
+                    date: addDays(addMonths(startDate, 6), 5),
+                    desc: "Evaluación final para certificar tu etapa.",
+                    doc: "F-023 Final + Paz y Salvo",
+                    icon: "fa-graduation-cap",
+                    color: "var(--secondary)"
+                });
+            }
+
+            // Sort by date
+            milestones.sort((a, b) => a.date - b.date);
+
+            // Render
+            milestones.forEach((m, index) => {
+                const dateStr = m.date.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+                const html = `
+                    <div class="timeline-item" style="animation-delay: ${index * 0.1}s">
+                        <div class="timeline-dot"></div>
+                        <div class="card-result" onclick="showDetails('${m.title}', '${m.desc}')">
+                            <span class="date-badge"><i class="far fa-calendar"></i> ${dateStr}</span>
+                            <h3><i class="fas ${m.icon}" style="color: ${m.color}"></i> ${m.title}</h3>
+                            <p>${m.desc}</p>
+                            <span class="doc-tag"><i class="fas fa-paperclip"></i> ${m.doc}</span>
+                        </div>
+                    </div>
+                `;
+                timeline.innerHTML += html;
+            });
+
+            document.getElementById('resultsArea').style.display = 'block';
+
+            // Scroll to results
+            document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth' });
+
+            Swal.fire({
+                icon: 'success',
+                title: '¡Cronograma Listo!',
+                text: 'Aquí tienes tu ruta personalizada.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+
+        function showDetails(title, desc) {
+            Swal.fire({
+                title: title,
+                text: desc,
+                icon: 'info',
+                confirmButtonText: 'Entendido',
+                confirmButtonColor: '#2D6A4F'
+            });
+        }
+
+        function showHelp() {
+            Swal.fire({
+                title: '¿Necesitas ayuda?',
+                html: 'Esta herramienta calcula automáticamente las fechas clave.',
+                icon: 'question',
+                confirmButtonColor: '#2D6A4F'
+            });
+        }
+        // MAYA BOT - Alaska Malamute Assistant
+        const mayaFab = document.getElementById('ai-fab');
+        const mayaChat = document.getElementById('chat-window');
+        const mayaClose = document.getElementById('close-chat');
+        const mayaInput = document.getElementById('chat-input');
+        const mayaSend = document.getElementById('send-btn');
+        const mayaBody = document.getElementById('chat-body');
+
+        if (mayaFab) {
+            mayaFab.innerHTML = '<img src="https://img.icons8.com/?size=96&id=rEkHtgGbERQY&format=png" style="width:70%; filter: brightness(1.2);">';
+            mayaFab.addEventListener('click', () => mayaChat.classList.toggle('hidden'));
+        }
+        if (mayaClose) {
+            mayaClose.addEventListener('click', () => mayaChat.classList.add('hidden'));
+        }
+
+        function mayaAddMsg(text, sender) {
+            const m = document.createElement('div');
+            m.className = `msg ${sender}`;
+            if (sender === 'user') { m.textContent = text; } else { m.innerHTML = text; }
+            mayaBody.appendChild(m);
+            mayaBody.scrollTop = mayaBody.scrollHeight;
+        }
+
+        function mayaShowTyping() {
+            const dot = document.createElement('div');
+            dot.className = 'msg bot typing';
+            dot.innerHTML = '<i class="fas fa-paw fa-bounce"></i> Maya está rastreando...';
+            dot.id = 'typing-indicator';
+            mayaBody.appendChild(dot);
+            mayaBody.scrollTop = mayaBody.scrollHeight;
+        }
+
+        function mayaRespond(q) {
+            const query = q.toLowerCase();
+            mayaShowTyping();
+            setTimeout(() => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+
+                let r = "Aprendiz, mi instinto no localiza ese rastro. ¿Deseas rastrear en la red?<br><br><a href='https://www.google.com/search?q=SENA+etapa+productiva+" + encodeURIComponent(query) + "' target='_blank' style='background:var(--primary); color:white; padding:5px 10px; border-radius:8px; text-decoration:none; font-size:0.7rem; font-weight:600;'>Rastrear en Google</a>";
+
+                const intents = [
+                    { keys: ['hola', 'buenos', 'quien eres', 'maya'], response: "¡Guau! 🐾 Soy <b>MAYA</b>, tu Border Collie guardiana. ¿Te ayudo con fechas de tu etapa productiva?" },
+                    { keys: ['bitacora', 'f-147', 'bitácora', 'reporte'], response: "<b>📋 Bitácora F-147:</b><br>Entrega <b>quincenal</b>. Esta calculadora te muestra cuándo.<br><br>📍 Descárgala en <a href='recursos_etapa_productiva.html' style='color:var(--primary); font-weight:600;'>Recursos</a>." },
+                    { keys: ['f023', 'f-023', 'planeación', 'seguimiento', 'visita'], response: "<b>📝 F-023:</b><br>Registro de tus 3 visitas técnicas. La calculadora te proyecta las fechas.<br><br>📍 Descárgalo en <a href='recursos_etapa_productiva.html' style='color:var(--primary); font-weight:600;'>Recursos</a>." },
+                    { keys: ['fecha', 'termino', 'cuando', 'calendario', 'cuanto'], response: "¡Estás en el lugar correcto! 📅 Ingresa tu fecha de inicio arriba para generar tu cronograma completo." },
+                    { keys: ['alternativa', 'contrato', 'pasantia', 'f165'], response: "<b>🔄 Alternativas:</b> Se formalizan con el <b>F-165</b>. Consulta el <a href='manual_aprendiz.html' style='color:var(--primary); font-weight:600;'>Manual del Aprendiz</a>." },
+                    { keys: ['sofia', 'plus', 'plataforma'], response: "<a href='https://oferta.senasofiaplus.edu.co/' target='_blank' style='color:var(--primary); font-weight:600;'>SofiaPlus</a> para verificar estado académico y certificados." },
+                    { keys: ['ayuda', 'soporte', 'zendesk', 'problema'], response: "Soporte técnico: <a href='https://sena.zendesk.com' target='_blank' style='color:var(--primary); font-weight:600;'>Zendesk SENA</a>" },
+                    { keys: ['momento', 'momentos', 'guia 040'], response: "<b>🐾 Los 6 Momentos:</b><br>1. Inicio (F-023)<br>2-4. Seguimientos<br>5. Evaluación Final (F-008)<br>6. Certificación (F-009)" },
+                    { keys: ['formato', 'formatos', 'gfpi', 'descarga'], response: "Todos los formatos GFPI están en <a href='recursos_etapa_productiva.html' style='color:var(--primary); font-weight:600;'><b>Recursos y Formatos</b></a>." }
+                ];
+
+                let bestMatch = null, maxScore = 0;
+                intents.forEach(intent => {
+                    let score = 0;
+                    intent.keys.forEach(key => { if (query.includes(key)) score++; });
+                    if (score > maxScore) { maxScore = score; bestMatch = intent.response; }
+                });
+
+                if (bestMatch) r = bestMatch;
+                mayaAddMsg(r, 'bot');
+            }, 1500);
+        }
+
+        if (mayaSend) {
+            mayaSend.addEventListener('click', () => {
+                if (!mayaInput.value.trim()) return;
+                mayaAddMsg(mayaInput.value, 'user');
+                mayaRespond(mayaInput.value);
+                mayaInput.value = '';
+            });
+        }
+
+        if (mayaInput) {
+            mayaInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') mayaSend.click();
+            });
+        }
+
+        // AI styles injected dynamically
+        const aiStyles = `
+        #ai-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #2D6A4F, #52B788);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(45, 106, 79, 0.3);
+            z-index: 10000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #ai-fab:hover { transform: scale(1.08); box-shadow: 0 6px 25px rgba(45, 106, 79, 0.4); }
+        .chat-window {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 380px;
+            height: 560px;
+            background: #FFFFFF;
+            border: 1px solid #E8E8E0;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 10000;
+            transform-origin: bottom right;
+            transition: all 0.3s ease;
+        }
+        .chat-window.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
+        .chat-header { background: linear-gradient(135deg, #1B4332, #2D6A4F); padding: 1.2rem 1.5rem; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .close-chat { background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; font-size: 1.2rem; transition: 0.3s; }
+        .close-chat:hover { color: white; transform: rotate(90deg); }
+        .chat-body { flex: 1; padding: 1.2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; background: #F7F7F2; }
+        .msg { max-width: 85%; padding: 0.9rem 1.1rem; border-radius: 16px; font-size: 0.88rem; line-height: 1.55; }
+        .msg.bot { align-self: flex-start; background: #FFFFFF; color: #2D3436; border: 1px solid #E8E8E0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .msg.user { align-self: flex-end; background: #2D6A4F; color: white; box-shadow: 0 2px 8px rgba(45,106,79,0.15); }
+        .chat-input-area { padding: 1rem; background: #FFFFFF; display: flex; gap: 0.6rem; border-top: 1px solid #E8E8E0; }
+        .chat-input { flex: 1; background: #FAFAF5; border: 1px solid #E8E8E0; border-radius: 12px; padding: 0.7rem 1rem; color: #2D3436; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; }
+        .chat-input:focus { border-color: #52B788; box-shadow: 0 0 0 3px rgba(82,183,136,0.15); }
+        .send-btn { background: #2D6A4F; border: none; color: white; width: 42px; height: 42px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .send-btn:hover { background: #245640; }
+        `;
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = aiStyles;
+        document.head.appendChild(styleSheet);
+    </script>
+
+
+</body>
+
+</html>

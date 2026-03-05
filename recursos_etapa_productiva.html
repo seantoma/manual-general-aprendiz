@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENA | Recursos y Formatos EP</title>
+    <meta name="description" content="Descarga de formatos oficiales y guías de apoyo para el aprendiz SENA.">
+    <meta name="keywords" content="SENA, Recursos, Formatos, Descargas, Guías EP">
+    <link rel="icon" href="https://img.icons8.com/?size=48&id=rEkHtgGbERQY&format=png" type="image/png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2D6A4F;
+            --primary-light: #52B788;
+            --primary-lighter: #B7E4C7;
+            --primary-bg: rgba(45, 106, 79, 0.08);
+            --secondary: #E07A5F;
+            --secondary-light: #F2A68B;
+            --accent: #457B9D;
+            --bg-main: #FAFAF5;
+            --bg-card: #FFFFFF;
+            --bg-header: #1B4332;
+            --text-main: #2D3436;
+            --text-muted: #636E72;
+            --border: #E8E8E0;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 50px;
+
+            /* Legacy aliases */
+            --neon-green: var(--primary);
+            --neon-cyan: var(--accent);
+            --neon-magenta: var(--secondary);
+            --neon-orange: var(--secondary);
+            --sena-verde: var(--primary);
+            --sena-azul: var(--accent);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-main);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-header) 0%, #2D6A4F 50%, #40916C 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(82, 183, 136, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin: 0;
+            color: white;
+        }
+
+        .header p {
+            font-family: var(--font-body);
+            margin-top: 1rem;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .guide-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .guide-header {
+            background: var(--bg-card);
+            color: var(--text-main);
+            padding: 1.5rem 2rem;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            border-left: 4px solid var(--primary);
+            transition: 0.3s;
+        }
+
+        .guide-header:hover {
+            background: var(--primary-bg);
+        }
+
+        .guide-header span i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .guide-body {
+            padding: 2rem 2rem;
+            display: none;
+            border-top: 1px solid var(--border);
+        }
+
+        .guide-body.show {
+            display: block;
+        }
+
+        .guide-body p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .guide-body ul {
+            color: var(--text-main);
+            line-height: 1.8;
+            margin-left: 20px;
+        }
+
+        .guide-body li strong {
+            color: var(--primary);
+        }
+
+        .example-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: none;
+        }
+
+        .tab-btn {
+            padding: 0.7rem 1.3rem;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-family: var(--font-body);
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+            font-size: 0.88rem;
+        }
+
+        .tab-btn.active {
+            color: white;
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            color: var(--text-main);
+        }
+
+        tr:hover {
+            background: var(--primary-bg);
+        }
+
+        .download-zone {
+            margin-top: 1.5rem;
+            text-align: right;
+        }
+
+        .btn-download {
+            background: var(--secondary);
+            border: none;
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: var(--font-body);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .btn-download:hover {
+            background: #C86A51;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(224, 122, 95, 0.25);
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s;
+            color: var(--primary);
+        }
+
+        .guide-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+
+            .guide-header {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1><i class="fas fa-book"></i> Guías y Ejemplos Prácticos</h1>
+        <p>Modelos de referencia visual para construir tu plan de trabajo y bitácora sin errores.</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver al Portal</a>
+    </div>
+
+    <div class="container">
+
+        <!-- Guía F-023 Concertación -->
+        <div class="guide-card">
+            <div class="guide-header" onclick="toggleGuide(this)">
+                <span><i class="fas fa-handshake"></i> Guía para Plan de Trabajo (F-023) Visitas</span>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="guide-body show">
+                <p>Este formato define tus actividades concertadas. Se diligencia en diferentes momentos clave:</p>
+                <ul style="margin-bottom: 20px;">
+                    <li><strong>Visita 1 (Concertación):</strong> Inicio de la etapa.</li>
+                    <li><strong>Visita 2 (Y visita 3 Parcial):</strong> Seguimiento al 40-50% de avance.</li>
+                    <li><strong>Visita Final:</strong> Cierre y evaluación.</li>
+                    <li><strong>Extraordinaria:</strong> En caso de novedades o incumplimientos.</li>
+                </ul>
+
+                <div class="example-tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'f023-ejemplo')">Ejemplo y Descarga</button>
+                    <button class="tab-btn" onclick="openTab(event, 'f023-consejos')">Recomendaciones</button>
+                </div>
+
+                <div id="f023-ejemplo" class="tab-content active">
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Actividad</th>
+                                    <th>Competencia / Resultado</th>
+                                    <th>Evidencias</th>
+                                    <th>Tiempo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Desarrollar módulo de autenticación segura.</td>
+                                    <td>Implementar soluciones de software.</td>
+                                    <td>Código fuente, Informes.</td>
+                                    <td>Semana 1-6</td>
+                                </tr>
+                                <tr>
+                                    <td>Documentar manuales de usuario.</td>
+                                    <td>Validar requisitos del software.</td>
+                                    <td>Manual PDF, Guías.</td>
+                                    <td>Semana 7-8</td>
+                                </tr>
+                                <tr>
+                                    <td>Ejecutar plan de pruebas unitarias.</td>
+                                    <td>Verificar calidad del software.</td>
+                                    <td>Log de pruebas, matriz de errores.</td>
+                                    <td>Semana 9-12</td>
+                                </tr>
+                                <tr>
+                                    <td>Migración de base de datos a producción.</td>
+                                    <td>Administrar bases de datos.</td>
+                                    <td>Script SQL, Backup.</td>
+                                    <td>Semana 15</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Dropdown Download Zone -->
+                    <div class="download-zone"
+                        style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; background: var(--primary-bg); padding: 15px; border-radius: 12px;">
+                        <label for="f023-select"
+                            style="font-family: var(--font-body); font-weight: 600; color: var(--primary); font-size: 0.9rem;">Seleccionar
+                            formato:</label>
+                        <select id="f023-select"
+                            style="background: var(--bg-main); color: var(--text-main); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-family: var(--font-body);">
+                            <option value="Formatos/Visita 1 GFPI-F023.xlsx">Visita 1 - Concertación</option>
+                            <option value="Formatos/Visita 2 GFPI-F023.xlsx">Visita 2 - Seguimiento Parcial</option>
+                            <option value="Formatos/Visita 3 GFPI-F023.xlsx">Visita 3 - Seguimiento Final</option>
+                            <option value="Formatos/Visita Extraordinaria GFPI-F023.xlsx">Visita Extraordinaria</option>
+                        </select>
+                        <a href="#" id="f023-btn" onclick="downloadSelectedF023(event)" class="btn-download">
+                            <i class="fas fa-file-download"></i> Descargar
+                        </a>
+                    </div>
+                </div>
+
+                <div id="f023-consejos" class="tab-content">
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Verbos en Infinitivo:</strong> Inicia siempre con verbos como <em>Analizar, Diseñar,
+                                Construir, Verificar</em>.</li>
+                        <li><strong>Alineación:</strong> Asegúrate que la actividad tenga relación directa con lo que
+                            estudiaste. Un desarrollador de software no debería poner "Servir cafés" o "Mensajería".
+                        </li>
+                        <li><strong>Firmas:</strong> Es vital que este documento tenga las 3 firmas (Tú, Jefe,
+                            Instructor) desde el primer mes.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guía F-147 Bitácora -->
+        <div class="guide-card">
+            <div class="guide-header" onclick="toggleGuide(this)">
+                <span><i class="fas fa-file-alt"></i> Guía para Bitácora (F-147)</span>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="guide-body">
+                <p>Tu diario de campo quincenal o mensual. Sé descriptivo y honesto con el tiempo reportado.</p>
+
+                <div class="example-tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'f147-ejemplo')">Ejemplo de Bitácora</button>
+                    <button class="tab-btn" onclick="openTab(event, 'f147-errores')">Errores Comunes</button>
+                </div>
+
+                <div id="f147-ejemplo" class="tab-content active">
+                    <h4 style="color: var(--primary); font-family: var(--font-heading); margin-bottom: 0.5rem;">Registro
+                        quincenal (extracto):</h4>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Actividad realizada</th>
+                                    <th>Horas</th>
+                                    <th>Observaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>05/04/2026</td>
+                                    <td>Configuración de entorno local y revisión de historias de usuario asignadas para
+                                        el sprint 1.</td>
+                                    <td>8</td>
+                                    <td>Se acordó estándar de ramas en Git con el equipo.</td>
+                                </tr>
+                                <tr>
+                                    <td>12/04/2026</td>
+                                    <td>Desarrollo inicial del formulario de registro y pruebas unitarias.</td>
+                                    <td>8</td>
+                                    <td>Se identificaron mejoras en validaciones de campos obligatorios.</td>
+                                </tr>
+                                <tr>
+                                    <td>15/04/2026</td>
+                                    <td>Reunión de seguimiento (Daily) y ajuste de estilos CSS en módulo de usuarios.
+                                    </td>
+                                    <td>4</td>
+                                    <td>Permiso de 4 horas en la tarde por cita médica (Soporte adjunto).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="download-zone">
+                        <a href="Formatos/BITACORAS GFPI-F-147V4.xlsx" class="btn-download" download><i
+                                class="fas fa-file-download"></i> Descargar Bitácora
+                            F-147</a>
+                    </div>
+                </div>
+
+                <div id="f147-errores" class="tab-content">
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Vagueza:</strong> Evita "Hacer lo que me dijo el jefe". Sé técnico: "Migración de
+                            base de datos SQL".</li>
+                        <li><strong>Periodos Inconsistentes:</strong> Si tu bitácora dice "Del 1 al 15", no puedes
+                            reportar una actividad del día 16.</li>
+                        <li><strong>Sin Evidencias:</strong> Siempre guarda pantallazos, correos o fotos que respalden
+                            lo que escribes.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guía F-165 Selección Alternativa -->
+        <div class="guide-card">
+            <div class="guide-header" onclick="toggleGuide(this)">
+                <span><i class="fas fa-file-signature"></i> Selección Alternativa (F-165)</span>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="guide-body">
+                <p>Usa este formato para declarar tu modalidad de etapa productiva o solicitar un cambio de la misma.
+                </p>
+
+                <div class="example-tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'f165-instrucciones')">Instrucciones</button>
+                    <button class="tab-btn" onclick="openTab(event, 'f165-descarga')">Descarga</button>
+                </div>
+
+                <div id="f165-instrucciones" class="tab-content active">
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Datos Básicos:</strong> Llena tu información personal y del programa de formación.
+                        </li>
+                        <li><strong>Selección:</strong> Marca con una X la alternativa elegida (Contrato de aprendizaje,
+                            Vínculo laboral, etc.).</li>
+                        <li><strong>Firmas:</strong> Debe estar firmado por ti y entregado a tu coordinador académico
+                            para el aval.</li>
+                    </ul>
+                </div>
+
+                <div id="f165-descarga" class="tab-content">
+                    <div class="download-zone"
+                        style="text-align: center; padding: 20px; background: var(--primary-bg); border-radius: 12px;">
+                        <p style="margin-bottom: 15px; color: var(--text-muted);">Descarga el formato oficial
+                            actualizado:</p>
+                        <a href="Formatos/GFPI-F-165V3_Seleccion_Alternativa.xlsx" class="btn-download" download>
+                            <i class="fas fa-file-excel"></i> Descargar F-165 (.xlsx)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MAYA AI AGENT -->
+    <button id="ai-fab"><i class="fas fa-paw"></i></button>
+    <div id="chat-window" class="chat-window hidden">
+        <div class="chat-header">
+            <span><b>MAYA Assistant</b> AI</span>
+            <button id="close-chat" class="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="msg bot">¡Guau! 🐾 ¡Hola, Aprendiz! Soy <b>MAYA</b>, tu Border Collie guardiana. ¿Dudas sobre
+                los
+                formatos?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Pregunta a Maya...">
+            <button id="send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // MAYA BOT - Alaska Malamute Assistant
+        const mayaFab = document.getElementById('ai-fab');
+        const mayaChat = document.getElementById('chat-window');
+        const mayaClose = document.getElementById('close-chat');
+        const mayaInput = document.getElementById('chat-input');
+        const mayaSend = document.getElementById('send-btn');
+        const mayaBody = document.getElementById('chat-body');
+
+        if (mayaFab) {
+            mayaFab.innerHTML = '<img src="https://img.icons8.com/?size=96&id=rEkHtgGbERQY&format=png" style="width:70%; filter: brightness(1.2);">';
+            mayaFab.addEventListener('click', () => mayaChat.classList.toggle('hidden'));
+        }
+        if (mayaClose) {
+            mayaClose.addEventListener('click', () => mayaChat.classList.add('hidden'));
+        }
+
+        function mayaAddMsg(text, sender) {
+            const m = document.createElement('div');
+            m.className = `msg ${sender}`;
+            if (sender === 'user') { m.textContent = text; } else { m.innerHTML = text; }
+            mayaBody.appendChild(m);
+            mayaBody.scrollTop = mayaBody.scrollHeight;
+        }
+
+        function mayaShowTyping() {
+            const dot = document.createElement('div');
+            dot.className = 'msg bot typing';
+            dot.innerHTML = '<i class="fas fa-paw fa-bounce"></i> Maya está rastreando...';
+            dot.id = 'typing-indicator';
+            mayaBody.appendChild(dot);
+            mayaBody.scrollTop = mayaBody.scrollHeight;
+        }
+
+        function mayaRespond(q) {
+            const query = q.toLowerCase();
+            mayaShowTyping();
+            setTimeout(() => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+
+                let r = "Aprendiz, mi instinto no localiza ese rastro. ¿Deseas rastrear en la red?<br><br><a href='https://www.google.com/search?q=SENA+etapa+productiva+" + encodeURIComponent(query) + "' target='_blank' style='background:var(--primary); color:white; padding:5px 10px; border-radius:8px; text-decoration:none; font-size:0.7rem; font-weight:600;'>Rastrear en Google</a>";
+
+                const intents = [
+                    { keys: ['hola', 'buenos', 'quien eres', 'maya'], response: "¡Guau! 🐾 Soy <b>MAYA</b>, tu Border Collie guardiana. ¿Te ayudo con los formatos?" },
+                    { keys: ['bitacora', 'f-147', 'bitácora', 'reporte', 'f147'], response: "<b>📋 Bitácora F-147:</b><br>Entrega <b>quincenal</b>, firmada por tu jefe.<br><br>👆 Tienes el link de descarga arriba en esta misma página." },
+                    { keys: ['f023', 'f-023', 'planeación', 'seguimiento', 'visita'], response: "<b>📝 F-023:</b><br>Registro de tus 3 visitas técnicas.<br><br>👆 Los formatos de cada visita están arriba para descargar." },
+                    { keys: ['f165', 'f-165', 'seleccion', 'selección', 'alternativa'], response: "<b>📄 F-165 (Selección Alternativa):</b><br>Está disponible en la sección inferior de esta página para descarga." },
+                    { keys: ['fecha', 'termino', 'cuando', 'cuanto'], response: "📅 Usa nuestra <a href='calculadora_fechas.html' style='color:var(--primary); font-weight:600;'><b>Calculadora de Fechas</b></a> para proyectar tu cierre." },
+                    { keys: ['contrato', 'pasantia', 'vinculacion'], response: "Consulta las 7 alternativas en el <a href='manual_aprendiz.html' style='color:var(--primary); font-weight:600;'>Manual del Aprendiz</a>." },
+                    { keys: ['sofia', 'plus', 'plataforma'], response: "<a href='https://oferta.senasofiaplus.edu.co/' target='_blank' style='color:var(--primary); font-weight:600;'>SofiaPlus</a> para estado académico y certificados." },
+                    { keys: ['ayuda', 'soporte', 'zendesk', 'problema'], response: "Soporte técnico: <a href='https://sena.zendesk.com' target='_blank' style='color:var(--primary); font-weight:600;'>Zendesk SENA</a>" },
+                    { keys: ['formato', 'formatos', 'gfpi', 'descarga'], response: "👆 ¡Estás en la página correcta! Todos los formatos GFPI están arriba para descargar." }
+                ];
+
+                let bestMatch = null, maxScore = 0;
+                intents.forEach(intent => {
+                    let score = 0;
+                    intent.keys.forEach(key => { if (query.includes(key)) score++; });
+                    if (score > maxScore) { maxScore = score; bestMatch = intent.response; }
+                });
+
+                if (bestMatch) r = bestMatch;
+                mayaAddMsg(r, 'bot');
+            }, 1500);
+        }
+
+        if (mayaSend) {
+            mayaSend.addEventListener('click', () => {
+                if (!mayaInput.value.trim()) return;
+                mayaAddMsg(mayaInput.value, 'user');
+                mayaRespond(mayaInput.value);
+                mayaInput.value = '';
+            });
+        }
+
+        if (mayaInput) {
+            mayaInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') mayaSend.click();
+            });
+        }
+
+        // AI styles injected dynamically
+        const aiStyles = `
+        #ai-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #2D6A4F, #52B788);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(45, 106, 79, 0.3);
+            z-index: 10000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #ai-fab:hover { transform: scale(1.08); box-shadow: 0 6px 25px rgba(45, 106, 79, 0.4); }
+        .chat-window {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 380px;
+            height: 560px;
+            background: #FFFFFF;
+            border: 1px solid #E8E8E0;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 10000;
+            transform-origin: bottom right;
+            transition: all 0.3s ease;
+        }
+        .chat-window.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
+        .chat-header { background: linear-gradient(135deg, #1B4332, #2D6A4F); padding: 1.2rem 1.5rem; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .close-chat { background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; font-size: 1.2rem; transition: 0.3s; }
+        .close-chat:hover { color: white; transform: rotate(90deg); }
+        .chat-body { flex: 1; padding: 1.2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; background: #F7F7F2; }
+        .msg { max-width: 85%; padding: 0.9rem 1.1rem; border-radius: 16px; font-size: 0.88rem; line-height: 1.55; }
+        .msg.bot { align-self: flex-start; background: #FFFFFF; color: #2D3436; border: 1px solid #E8E8E0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .msg.user { align-self: flex-end; background: #2D6A4F; color: white; box-shadow: 0 2px 8px rgba(45,106,79,0.15); }
+        .chat-input-area { padding: 1rem; background: #FFFFFF; display: flex; gap: 0.6rem; border-top: 1px solid #E8E8E0; }
+        .chat-input { flex: 1; background: #FAFAF5; border: 1px solid #E8E8E0; border-radius: 12px; padding: 0.7rem 1rem; color: #2D3436; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; }
+        .chat-input:focus { border-color: #52B788; box-shadow: 0 0 0 3px rgba(82,183,136,0.15); }
+        .send-btn { background: #2D6A4F; border: none; color: white; width: 42px; height: 42px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .send-btn:hover { background: #245640; }
+        `;
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = aiStyles;
+        document.head.appendChild(styleSheet);
+
+        function downloadSelectedF023(event) {
+            event.preventDefault();
+            const select = document.getElementById('f023-select');
+            const url = select.value;
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = url.split('/').pop();
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function toggleGuide(header) {
+            header.classList.toggle('active');
+            const body = header.nextElementSibling;
+            body.classList.toggle('show');
+        }
+
+        function openTab(evt, tabName) {
+            const parent = evt.target.closest('.guide-body');
+            const tabContents = parent.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].style.display = "none";
+            }
+            const tabBtns = parent.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].className = tabBtns[i].className.replace(" active", "");
+            }
+            parent.querySelector(`#${tabName}`).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+
+</body>
+
+</html>
