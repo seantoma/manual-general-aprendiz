@@ -530,6 +530,61 @@
 
     </div>
 
+    <!-- Información CSF (Extra) -->
+    <div class="guide-card">
+        <div class="guide-header" onclick="toggleGuide(this)">
+            <span><i class="fas fa-info-circle"></i> CSF Etapa productiva (Más Información)</span>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+        </div>
+        <div class="guide-body">
+            <p>Información específica para aprendices del <strong>Centro de Servicios Financieros (Regional Distrito
+                    Capital)</strong>, incluyendo procesos para formación virtual y presencial.</p>
+
+            <div class="example-tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'csf-virtual')">Registro Virtual</button>
+                <button class="tab-btn" onclick="openTab(event, 'csf-contacto')">Contacto y Sedes</button>
+                <button class="tab-btn" onclick="openTab(event, 'csf-info')">Términos</button>
+            </div>
+
+            <div id="csf-virtual" class="tab-content active">
+                <p style="margin-bottom: 15px;">Si eres aprendiz de formación virtual, esta información es vital para tu
+                    proceso:</p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="https://drive.google.com/file/d/1XIUYCaJKc2xSJdsn156xT9u8XXLHBao3/view?usp=drive_link"
+                        target="_blank" class="btn-download" style="background: var(--accent); width: fit-content;">
+                        <i class="fas fa-file-pdf"></i> Consultar Términos y Condiciones
+                    </a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKo_rS5klSpyCFYAGuEt7c8URLVrDGeL595bOnonNwYvyrJQ/viewform"
+                        target="_blank" class="btn-download" style="background: var(--primary); width: fit-content;">
+                        <i class="fas fa-edit"></i> Formulario Registro Alternativa
+                    </a>
+                </div>
+            </div>
+
+            <div id="csf-contacto" class="tab-content">
+                <ul style="line-height: 1.8;">
+                    <li><strong>Sede Principal:</strong> Cra. 13 #65-10, Barrio Chapinero, Bogotá D.C.</li>
+                    <li><strong>Sede Salitre:</strong> Cra. 57c # 64-29, Bogotá.</li>
+                    <li><strong>Línea Bogotá:</strong> +(57) 601 7366060</li>
+                    <li><strong>Línea Nacional:</strong> 018000 910270</li>
+                </ul>
+            </div>
+
+            <div id="csf-info" class="tab-content">
+                <p>Recuerda que la coordinación de Etapa Productiva del CSF realiza programaciones específicas para el
+                    registro y seguimiento de alternativas. Mantente atento a los canales oficiales del Centro.</p>
+                <div class="download-zone">
+                    <a href="https://serviciosfinancierosena.blogspot.com/p/etapa-productiva.html" target="_blank"
+                        class="btn-download" style="background: var(--text-muted);">
+                        <i class="fas fa-external-link-alt"></i> Visitar Blog Oficial CSF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
     <!-- MAYA AI AGENT -->
     <button id="ai-fab"><i class="fas fa-paw"></i></button>
     <div id="chat-window" class="chat-window hidden">
