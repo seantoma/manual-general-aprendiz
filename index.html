@@ -8,7 +8,8 @@
     <meta name="description" content="Portal de servicios y manuales para el aprendiz SENA en Etapa Productiva.">
     <meta name="keywords" content="SENA, Aprendiz, Etapa Productiva, Manual, SofiaPlus">
     <link rel="icon" href="https://img.icons8.com/?size=48&id=rEkHtgGbERQY&format=png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -249,71 +250,6 @@
             color: white;
         }
 
-        /* --- SCHEDULER WIDGET --- */
-        .scheduler-section {
-            max-width: 1100px;
-            width: 100%;
-            padding: 0 2rem 5rem 2rem;
-            margin: 0 auto;
-        }
-
-        .scheduler-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 3.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-        }
-
-        .scheduler-card h2 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: var(--text-main);
-        }
-
-        .scheduler-card p {
-            max-width: 600px;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
-
-        .date-badge {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 2rem;
-            background: var(--primary-bg);
-            padding: 0.8rem 2.5rem;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--primary-lighter);
-        }
-
-        .btn-primary-glow {
-            padding: 1rem 2.5rem;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: var(--radius-full);
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.2);
-        }
-
-        .btn-primary-glow:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(45, 106, 79, 0.3);
-            background: #245640;
-        }
-
         /* --- FOOTER --- */
         footer {
             margin-top: auto;
@@ -526,8 +462,8 @@
 
     <section class="hero-section">
         <div class="qr-frame">
-            <img src="img/portal-qr.png" alt="Portal QR"
-                onerror="this.src='https://via.placeholder.com/200?text=QR+Portal+SENA'">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://seantoma.github.io/manual-general-aprendiz/"
+                alt="Portal QR">
         </div>
         <div class="hero-badge">Sincronización Móvil Activa</div>
     </section>
@@ -558,18 +494,7 @@
         </a>
     </main>
 
-    <section class="scheduler-section">
-        <div class="scheduler-card">
-            <h2>Agendamiento Profesional</h2>
-            <p>Coordina tus visitas técnicas y sesiones de seguimiento parcial o final con tu instructor asignado de
-                forma autónoma.</p>
-            <div id="date-badge" class="date-badge">-- / --</div>
-            <a href="https://outlook.office.com/book/ReservasEtapaProductivaCSF@sena.edu.co/" target="_blank"
-                rel="noopener" class="btn-primary-glow">
-                Programar Cita en MS Bookings
-            </a>
-        </div>
-    </section>
+
 
     <footer>
         <p>&copy; 2025 SENA | Centro de Formación | Todos los derechos reservados</p>
@@ -593,10 +518,7 @@
     </div>
 
     <script>
-        // Update current date
-        const d = new Date();
-        const options = { weekday: 'long', day: 'numeric', month: 'long' };
-        document.getElementById('date-badge').innerText = d.toLocaleDateString('es-ES', options).toUpperCase();
+
 
         // MAYA BOT - Alaska Malamute Assistant
         const fab = document.getElementById('ai-fab');
