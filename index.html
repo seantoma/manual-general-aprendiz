@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -8,28 +8,38 @@
     <meta name="description" content="Portal de servicios y manuales para el aprendiz SENA en Etapa Productiva.">
     <meta name="keywords" content="SENA, Aprendiz, Etapa Productiva, Manual, SofiaPlus">
     <link rel="icon" href="https://img.icons8.com/?size=48&id=rEkHtgGbERQY&format=png" type="image/png">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Outfit:wght@300;400;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* Neon Cyberpunk Palette */
-            --bg-deep: #020617;
-            --glass-bg: rgba(15, 23, 42, 0.7);
-            --glass-border: rgba(0, 243, 255, 0.2);
-            --accent-cyan: #00f3ff;
-            --accent-magenta: #ff00ff;
-            --accent-emerald: #10b981;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --glow-cyan: rgba(0, 243, 255, 0.3);
-            --glow-magenta: rgba(255, 0, 0, 0.3);
-            --font-main: 'Outfit', 'Montserrat', sans-serif;
+            --primary: #2D6A4F;
+            --primary-light: #52B788;
+            --primary-lighter: #B7E4C7;
+            --primary-bg: rgba(45, 106, 79, 0.08);
+            --secondary: #E07A5F;
+            --secondary-light: #F2A68B;
+            --accent: #457B9D;
+            --bg-main: #FAFAF5;
+            --bg-card: #FFFFFF;
+            --bg-header: #1B4332;
+            --text-main: #2D3436;
+            --text-muted: #636E72;
+            --text-light: #FFFFFF;
+            --border: #E8E8E0;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 50px;
 
-            /* Legacy Palette for Compatibility */
-            --accent-indigo: var(--accent-cyan);
-            --neon-green: #39A900;
+            /* Chat colors */
+            --chat-primary: var(--primary);
+            --chat-accent: var(--secondary);
         }
 
         * {
@@ -39,11 +49,8 @@
         }
 
         body {
-            font-family: var(--font-main);
-            background: var(--bg-deep);
-            background-image:
-                radial-gradient(circle at 0% 0%, rgba(0, 243, 255, 0.2) 0%, transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(255, 0, 255, 0.15) 0%, transparent 60%);
+            font-family: var(--font-body);
+            background: var(--bg-main);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -52,45 +59,61 @@
             line-height: 1.6;
         }
 
-        /* Ambient Glow Objects */
-        .ambient-glow {
-            position: fixed;
-            width: 40vw;
-            height: 40vw;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-
         /* --- HEADER --- */
         .elegant-header {
-            padding: 4rem 2rem 2rem 2rem;
+            background: linear-gradient(135deg, var(--bg-header) 0%, #2D6A4F 50%, #40916C 100%);
+            padding: 4rem 2rem 3rem 2rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .elegant-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(82, 183, 136, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .elegant-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(224, 122, 95, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .elegant-header h1 {
-            font-size: 3.8rem;
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(to right, #fff, var(--accent-cyan), var(--accent-magenta));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-light);
             margin-bottom: 0.5rem;
-            letter-spacing: -2px;
-            filter: drop-shadow(0 0 10px var(--glow-cyan));
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
         }
 
         .elegant-header p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 400;
+            letter-spacing: 1px;
             text-transform: uppercase;
+            position: relative;
+            z-index: 1;
         }
 
         /* --- HERO QR --- */
@@ -99,310 +122,250 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            margin-bottom: 1rem;
         }
 
         .qr-frame {
-            position: relative;
-            padding: 24px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 0 30px var(--glow-cyan);
-            margin-bottom: 2rem;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: float 6s ease-in-out infinite;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
         }
 
         .qr-frame:hover {
-            transform: translateY(-10px) scale(1.05);
-            border-color: var(--accent-magenta);
-            box-shadow: 0 0 50px var(--glow-magenta);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .qr-frame img {
-            width: 200px;
-            height: 200px;
-            border-radius: 15px;
+            width: 180px;
+            height: 180px;
+            border-radius: var(--radius-sm);
             display: block;
-            filter: drop-shadow(0 0 10px var(--glow-cyan));
-        }
-
-        .qr-frame::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            background: linear-gradient(45deg, var(--accent-cyan), transparent, var(--accent-magenta));
-            border-radius: 35px;
-            z-index: -1;
-            opacity: 0.5;
-            animation: hologram-rotate 4s linear infinite;
-        }
-
-        .qr-frame::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 30px;
-            background: radial-gradient(circle at center, transparent 30%, rgba(0, 243, 255, 0.1));
-            pointer-events: none;
-        }
-
-        @media (max-width: 768px) {
-            .elegant-header h1 {
-                font-size: 2.5rem;
-                letter-spacing: -1px;
-            }
-
-            .qr-frame img {
-                width: 150px;
-                height: 150px;
-            }
-
-            .hero-section {
-                padding: 1rem;
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-
-        @keyframes hologram-rotate {
-            0% {
-                filter: hue-rotate(0deg) blur(5px);
-            }
-
-            100% {
-                filter: hue-rotate(360deg) blur(5px);
-            }
         }
 
         .hero-badge {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            color: var(--accent-indigo);
+            background: var(--primary-bg);
+            border: 1px solid var(--primary-lighter);
+            color: var(--primary);
             padding: 0.5rem 1.5rem;
-            border-radius: 50px;
+            border-radius: var(--radius-full);
             font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* --- DASHBOARD --- */
         .dashboard-container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 2rem 4rem 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
             width: 100%;
         }
 
         .glass-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 3rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(12px);
+            transition: all 0.35s ease;
+            box-shadow: var(--shadow-sm);
             position: relative;
             overflow: hidden;
         }
 
         .glass-card:hover {
-            transform: translateY(-10px);
-            background: rgba(15, 23, 42, 0.8);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px var(--glow-indigo);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-lighter);
         }
 
         .card-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent-indigo), #312e81);
-            border-radius: 20px;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: white;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);
         }
 
         .glass-card.orange .card-icon {
-            background: linear-gradient(135deg, var(--accent-orange), #78350f);
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            box-shadow: 0 4px 12px rgba(224, 122, 95, 0.2);
         }
 
         .glass-card h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: white;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
         }
 
         .glass-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
             line-height: 1.6;
         }
 
         .btn-elegant {
-            padding: 0.8rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            color: white;
-            border-radius: 15px;
+            padding: 0.7rem 1.8rem;
+            background: var(--primary-bg);
+            border: 1px solid var(--primary-lighter);
+            color: var(--primary);
+            border-radius: var(--radius-full);
             font-weight: 600;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
         }
 
         .glass-card:hover .btn-elegant {
-            background: var(--accent-indigo);
-            border-color: var(--accent-indigo);
-            box-shadow: 0 10px 20px var(--glow-indigo);
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
         }
 
         .glass-card.orange:hover .btn-elegant {
-            background: var(--accent-orange);
-            border-color: var(--accent-orange);
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
         }
 
         /* --- SCHEDULER WIDGET --- */
         .scheduler-section {
-            max-width: 1200px;
+            max-width: 1100px;
             width: 100%;
-            padding: 0 2rem 6rem 2rem;
+            padding: 0 2rem 5rem 2rem;
             margin: 0 auto;
         }
 
         .scheduler-card {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
-            border: 1px solid var(--glow-emerald);
-            border-radius: 30px;
-            padding: 4rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--shadow-md);
         }
 
         .scheduler-card h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-emerald);
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
         }
 
         .scheduler-card p {
-            max-width: 700px;
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-size: 1rem;
             color: var(--text-muted);
         }
 
         .date-badge {
-            font-size: 3rem;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
             font-weight: 700;
-            color: white;
-            margin-bottom: 2.5rem;
-            background: rgba(16, 185, 129, 0.1);
-            padding: 1rem 3rem;
-            border-radius: 20px;
-            border: 1px solid var(--glow-emerald);
+            color: var(--primary);
+            margin-bottom: 2rem;
+            background: var(--primary-bg);
+            padding: 0.8rem 2.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--primary-lighter);
         }
 
         .btn-primary-glow {
-            padding: 1.2rem 3.5rem;
-            background: var(--accent-emerald);
-            color: #020617;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: white;
             text-decoration: none;
-            border-radius: 18px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 15px 30px var(--glow-emerald);
+            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.2);
         }
 
         .btn-primary-glow:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
-            filter: brightness(1.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(45, 106, 79, 0.3);
+            background: #245640;
         }
 
         /* --- FOOTER --- */
         footer {
             margin-top: auto;
-            padding: 3rem;
+            padding: 2.5rem;
             text-align: center;
-            border-top: 1px solid var(--glass-border);
-            color: var(--text-muted);
+            background: var(--bg-header);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
 
         /* --- AI ASSISTANT --- */
         #ai-fab {
             position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             cursor: pointer;
-            box-shadow: 0 0 20px var(--glow-cyan);
+            box-shadow: 0 4px 20px rgba(45, 106, 79, 0.3);
             z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         #ai-fab:hover {
-            transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 0 40px var(--glow-magenta);
+            transform: scale(1.08);
+            box-shadow: 0 6px 25px rgba(45, 106, 79, 0.4);
         }
 
         .chat-window {
             position: fixed;
-            bottom: 125px;
-            right: 40px;
+            bottom: 110px;
+            right: 30px;
             width: 380px;
-            height: 580px;
-            background: #0f172a;
-            border: 1px solid var(--accent-cyan);
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            height: 560px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             z-index: 1000;
             transform-origin: bottom right;
             transition: all 0.3s ease;
-            backdrop-filter: blur(20px);
         }
 
         .chat-window.hidden {
@@ -412,107 +375,133 @@
         }
 
         .chat-header {
-            background: linear-gradient(90deg, #0f172a, #1e293b);
-            padding: 1.5rem;
-            color: var(--accent-cyan);
+            background: linear-gradient(135deg, var(--bg-header), var(--primary));
+            padding: 1.2rem 1.5rem;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--accent-cyan);
         }
 
         .chat-header h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 600;
         }
 
         .close-chat {
             background: none;
             border: none;
-            color: var(--accent-magenta);
+            color: rgba(255, 255, 255, 0.7);
             cursor: pointer;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             transition: 0.3s;
         }
 
         .close-chat:hover {
+            color: white;
             transform: rotate(90deg);
-            text-shadow: 0 0 10px var(--accent-magenta);
         }
 
         .chat-body {
             flex: 1;
-            padding: 1.5rem;
+            padding: 1.2rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
-            background: rgba(15, 23, 42, 0.9);
+            gap: 1rem;
+            background: #F7F7F2;
         }
 
         .msg {
             max-width: 85%;
-            padding: 1rem;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            padding: 0.9rem 1.1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            line-height: 1.55;
             position: relative;
         }
 
         .msg.bot {
             align-self: flex-start;
-            background: rgba(30, 41, 59, 0.8);
-            color: #e2e8f0;
-            border-left: 3px solid var(--accent-cyan);
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
         }
 
         .msg.user {
             align-self: flex-end;
-            background: var(--accent-magenta);
+            background: var(--primary);
             color: white;
-            border-right: 3px solid #fff;
-            box-shadow: -5px 5px 15px rgba(255, 0, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);
         }
 
         .chat-input-area {
-            padding: 1.2rem;
-            background: #1e293b;
+            padding: 1rem;
+            background: var(--bg-card);
             display: flex;
-            gap: 0.8rem;
-            border-top: 1px solid rgba(0, 243, 255, 0.3);
+            gap: 0.6rem;
+            border-top: 1px solid var(--border);
         }
 
         .chat-input {
             flex: 1;
-            padding: 0.8rem 1rem;
-            font-family: inherit;
-            font-size: 0.95rem;
+            padding: 0.7rem 1rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--bg-main);
+            color: var(--text-main);
+            outline: none;
+            transition: 0.2s;
         }
 
         .chat-input:focus {
-            outline: none;
-            border-color: var(--accent-indigo);
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
         }
 
         .send-btn {
-            background: var(--accent-indigo);
+            background: var(--primary);
             border: none;
             color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s;
         }
 
+        .send-btn:hover {
+            background: #245640;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .elegant-header h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .qr-frame img {
+                width: 140px;
+                height: 140px;
+            }
+
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+
+            .scheduler-card {
+                padding: 2rem;
             }
 
             .chat-window {
@@ -530,8 +519,6 @@
 </head>
 
 <body>
-    <div class="ambient-glow" style="top: -10%; left: -10%; background: var(--accent-indigo);"></div>
-
     <header class="elegant-header">
         <h1>Portal del Aprendiz</h1>
         <p>Servicio Nacional de Aprendizaje SENA</p>
@@ -572,10 +559,10 @@
 
         <!-- Blog CSF -->
         <a href="https://serviciosfinancierosena.blogspot.com/p/etapa-productiva.html" target="_blank" rel="noopener" class="glass-card">
-            <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="fas fa-blog"></i></div>
+            <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);"><i class="fas fa-blog"></i></div>
             <h2>Blog CSF Etapa Productiva</h2>
             <p>Accede al blog oficial del CSF con información actualizada sobre la etapa productiva.</p>
-            <div class="btn-elegant">Visitar Blog</div>
+            <div class="btn-elegant" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #d97706;">Visitar Blog</div>
         </a>
     </main>
 
@@ -665,7 +652,7 @@
                 const indicator = document.getElementById('typing-indicator');
                 if (indicator) indicator.remove();
 
-                let r = "Aprendiz, mi instinto no localiza ese rastro específico en la documentación interna. ¿Deseas que rastreemos en la red global SENA?<br><br><div style='display:flex; gap:5px; flex-wrap:wrap;'><a href='https://www.google.com/search?q=SENA+etapa+productiva+" + encodeURIComponent(query) + "' target='_blank' style='background:var(--accent-cyan); color:#020617; padding:5px 10px; border-radius:5px; text-decoration:none; font-size:0.7rem; font-weight:600;'>Rastrear en Google</a></div>";
+                let r = "Aprendiz, mi instinto no localiza ese rastro específico en la documentación interna. ¿Deseas que rastreemos en la red global SENA?<br><br><div style='display:flex; gap:5px; flex-wrap:wrap;'><a href='https://www.google.com/search?q=SENA+etapa+productiva+" + encodeURIComponent(query) + "' target='_blank' style='background:var(--primary); color:white; padding:5px 10px; border-radius:8px; text-decoration:none; font-size:0.7rem; font-weight:600;'>Rastrear en Google</a></div>";
 
                 const intents = [
                     {
@@ -674,19 +661,19 @@
                     },
                     {
                         keys: ['bitacora', 'f-147', 'bitácora', 'formato 147', 'reporte'],
-                        response: "<b>📋 Bitácora GFPI-F-147 - Tu registro quincenal:</b><br><br>La <b>Bitácora (F-147)</b> es tu instrumento de seguimiento <b>QUINCENAL</b> obligatorio.<br><br><b>¿Qué debes hacer?</b><br>• Llenarla <b>cada 15 días</b> sin excepción<br>• Describir las actividades realizadas en la empresa<br>• Obtener la firma de tu <b>jefe inmediato</b><br>• Entregar al instructor en cada visita de seguimiento<br><br><b>⚠️ Importante:</b><br>• Sin bitácoras al día = <b>riesgo de novedad académica</b><br>• Bitácoras sin firma = <b>no son válidas</b><br><br>📍 Descarga el formato en <a href='recursos_etapa_productiva.html' style='color:var(--accent-cyan)'>Recursos y Formatos</a>."
+                        response: "<b>📋 Bitácora GFPI-F-147 - Tu registro quincenal:</b><br><br>La <b>Bitácora (F-147)</b> es tu instrumento de seguimiento <b>QUINCENAL</b> obligatorio.<br><br><b>¿Qué debes hacer?</b><br>• Llenarla <b>cada 15 días</b> sin excepción<br>• Describir las actividades realizadas en la empresa<br>• Obtener la firma de tu <b>jefe inmediato</b><br>• Entregar al instructor en cada visita de seguimiento<br><br><b>⚠️ Importante:</b><br>• Sin bitácoras al día = <b>riesgo de novedad académica</b><br>• Bitácoras sin firma = <b>no son válidas</b><br><br>📍 Descarga el formato en <a href='recursos_etapa_productiva.html' style='color:var(--primary); font-weight:600;'>Recursos y Formatos</a>."
                     },
                     {
                         keys: ['f023', 'f-023', 'planeación', 'planeacion', 'seguimiento', 'evaluacion', 'evaluación', 'visita'],
-                        response: "<b>📝 Formato GFPI-F-023 - Planeación y Seguimiento:</b><br><br>El <b>F-023</b> es el registro oficial de las <b>3 visitas técnicas</b> que tu instructor realiza durante tu etapa productiva.<br><br><b>Las 3 visitas:</b><br>1. <b>Visita Inicial:</b> Validación del plan de trabajo<br>2. <b>Visita de Seguimiento:</b> Revisión de avance y competencias<br>3. <b>Visita Final:</b> Evaluación y cierre de etapa<br><br><b>Tu responsabilidad:</b><br>• Estar presente en TODAS las visitas<br>• Tener bitácoras al día para cada visita<br>• Coordinar con tu empresa la agenda<br><br>📍 Descárgalo en <a href='recursos_etapa_productiva.html' style='color:var(--accent-cyan)'>Recursos y Formatos</a>."
+                        response: "<b>📝 Formato GFPI-F-023 - Planeación y Seguimiento:</b><br><br>El <b>F-023</b> es el registro oficial de las <b>3 visitas técnicas</b> que tu instructor realiza durante tu etapa productiva.<br><br><b>Las 3 visitas:</b><br>1. <b>Visita Inicial:</b> Validación del plan de trabajo<br>2. <b>Visita de Seguimiento:</b> Revisión de avance y competencias<br>3. <b>Visita Final:</b> Evaluación y cierre de etapa<br><br><b>Tu responsabilidad:</b><br>• Estar presente en TODAS las visitas<br>• Tener bitácoras al día para cada visita<br>• Coordinar con tu empresa la agenda<br><br>📍 Descárgalo en <a href='recursos_etapa_productiva.html' style='color:var(--primary); font-weight:600;'>Recursos y Formatos</a>."
                     },
                     {
                         keys: ['alternativa', 'contrato', 'pasantia', 'pasantía', 'vinculacion', 'proyecto productivo', 'f165', 'f-165', 'monitoria', 'monitoría'],
-                        response: "<b>🔄 Las 7 Alternativas de Etapa Productiva:</b><br><br>Según la <b>Guía 040</b>, puedes realizar tu etapa productiva así:<br><br>1. <b>Contrato de Aprendizaje</b> (Ley 789/2002) - La más común<br>2. <b>Pasantía</b> - Convenio con empresa sin relación laboral<br>3. <b>Vinculación Laboral</b> - Si ya estás trabajando en tu área<br>4. <b>Proyecto Productivo</b> - Emprendimiento aprobado por el SENA<br>5. <b>Monitoría</b> - Apoyo a procesos internos<br>6. <b>Proyecto de Investigación</b> - Avalado por SENNOVA<br>7. <b>Unidad Productiva Familiar</b> - Para programas rurales<br><br>📄 La elección se formaliza con el formato <b>F-165</b>. Consulta el <a href='manual_aprendiz.html' style='color:var(--accent-cyan)'>Manual del Aprendiz</a> para más detalles."
+                        response: "<b>🔄 Las 7 Alternativas de Etapa Productiva:</b><br><br>Según la <b>Guía 040</b>, puedes realizar tu etapa productiva así:<br><br>1. <b>Contrato de Aprendizaje</b> (Ley 789/2002) - La más común<br>2. <b>Pasantía</b> - Convenio con empresa sin relación laboral<br>3. <b>Vinculación Laboral</b> - Si ya estás trabajando en tu área<br>4. <b>Proyecto Productivo</b> - Emprendimiento aprobado por el SENA<br>5. <b>Monitoría</b> - Apoyo a procesos internos<br>6. <b>Proyecto de Investigación</b> - Avalado por SENNOVA<br>7. <b>Unidad Productiva Familiar</b> - Para programas rurales<br><br>📄 La elección se formaliza con el formato <b>F-165</b>. Consulta el <a href='manual_aprendiz.html' style='color:var(--primary); font-weight:600;'>Manual del Aprendiz</a> para más detalles."
                     },
                     {
                         keys: ['acuerdo 009', 'acuerdo 9', 'reglamento', 'faltas', 'sanciones', 'sancion', 'falta'],
-                        response: "<b>📜 Acuerdo 009 de 2024 - Reglamento del Aprendiz:</b><br><br>Este acuerdo regula tus derechos y deberes como aprendiz SENA.<br><br><b>Lo más importante para ti:</b><br>• <b>Art. 9:</b> Tus deberes en etapa productiva<br>• <b>Art. 23:</b> Faltas académicas por incumplimiento<br>• <b>Art. 24:</b> Faltas disciplinarias<br>• <b>Art. 25:</b> Procedimiento para novedades<br><br><b>⚠️ Alerta Importante:</b><br>• <b>3 días hábiles sin justificación</b> = Reporte de deserción<br>• <b>Inasistencia a visitas</b> = Falta académica<br>• <b>No entregar bitácoras</b> = Novedad académica<br><br>Consulta el texto completo en el <a href='manual_aprendiz.html' style='color:var(--accent-cyan)'>Manual del Aprendiz</a>."
+                        response: "<b>📜 Acuerdo 009 de 2024 - Reglamento del Aprendiz:</b><br><br>Este acuerdo regula tus derechos y deberes como aprendiz SENA.<br><br><b>Lo más importante para ti:</b><br>• <b>Art. 9:</b> Tus deberes en etapa productiva<br>• <b>Art. 23:</b> Faltas académicas por incumplimiento<br>• <b>Art. 24:</b> Faltas disciplinarias<br>• <b>Art. 25:</b> Procedimiento para novedades<br><br><b>⚠️ Alerta Importante:</b><br>• <b>3 días hábiles sin justificación</b> = Reporte de deserción<br>• <b>Inasistencia a visitas</b> = Falta académica<br>• <b>No entregar bitácoras</b> = Novedad académica<br><br>Consulta el texto completo en el <a href='manual_aprendiz.html' style='color:var(--primary); font-weight:600;'>Manual del Aprendiz</a>."
                     },
                     {
                         keys: ['tyt', 'prueba saber', 'saber pro', 'saber tyt', 'certificacion', 'certificación', 'icfes'],
@@ -694,15 +681,15 @@
                     },
                     {
                         keys: ['sofia', 'plus', 'sofiaplus', 'plataforma'],
-                        response: "<b>🌐 SENA SofiaPlus - Tu plataforma académica:</b><br><br><a href='https://oferta.senasofiaplus.edu.co/' target='_blank' style='color:var(--accent-cyan)'><b>SofiaPlus</b></a> es donde puedes:<br>• Verificar tu estado académico<br>• Descargar certificados<br>• Consultar tu programa de formación<br>• Ver tus RAPs y competencias<br><br>⚠️ <b>Tip:</b> Si tienes problemas de acceso, usa <a href='https://sena.zendesk.com' target='_blank' style='color:var(--accent-magenta)'>Zendesk SENA</a> para soporte técnico."
+                        response: "<b>🌐 SENA SofiaPlus - Tu plataforma académica:</b><br><br><a href='https://oferta.senasofiaplus.edu.co/' target='_blank' style='color:var(--primary); font-weight:600;'><b>SofiaPlus</b></a> es donde puedes:<br>• Verificar tu estado académico<br>• Descargar certificados<br>• Consultar tu programa de formación<br>• Ver tus RAPs y competencias<br><br>⚠️ <b>Tip:</b> Si tienes problemas de acceso, usa <a href='https://sena.zendesk.com' target='_blank' style='color:var(--secondary); font-weight:600;'>Zendesk SENA</a> para soporte técnico."
                     },
                     {
                         keys: ['fecha', 'termino', 'final', 'cuanto me falta', 'calculador', 'cuando termino'],
-                        response: "<b>📅 ¿Cuánto te falta? Usa la Calculadora:</b><br><br>Puedes proyectar tu fecha exacta de cierre de etapa productiva con nuestra herramienta.<br><br>👉 <a href='calculadora_fechas.html' style='color:var(--accent-cyan)'><b>Abrir Calculadora de Fechas</b></a><br><br>Solo necesitas ingresar tu fecha de inicio y la duración de tu programa. La calculadora te mostrará tu fecha de finalización y los días restantes."
+                        response: "<b>📅 ¿Cuánto te falta? Usa la Calculadora:</b><br><br>Puedes proyectar tu fecha exacta de cierre de etapa productiva con nuestra herramienta.<br><br>👉 <a href='calculadora_fechas.html' style='color:var(--primary); font-weight:600;'><b>Abrir Calculadora de Fechas</b></a><br><br>Solo necesitas ingresar tu fecha de inicio y la duración de tu programa. La calculadora te mostrará tu fecha de finalización y los días restantes."
                     },
                     {
                         keys: ['formato', 'formatos', 'gfpi', 'descarga', 'documento', 'acta'],
-                        response: "<b>📂 Formatos GFPI que necesitas:</b><br><br>• <b>GFPI-F-023:</b> Planeación, seguimiento y evaluación<br>• <b>GFPI-F-147:</b> Bitácora quincenal<br>• <b>GFPI-F-165:</b> Aval de alternativa de etapa productiva<br>• <b>GFPI-F-008:</b> Planeación de la evaluación<br>• <b>GFPI-F-009:</b> Juicio evaluativo<br>• <b>GFPI-F-123:</b> Acta de inicio<br><br>📍 Todos los formatos están disponibles en <a href='recursos_etapa_productiva.html' style='color:var(--accent-cyan)'><b>Recursos y Formatos</b></a>."
+                        response: "<b>📂 Formatos GFPI que necesitas:</b><br><br>• <b>GFPI-F-023:</b> Planeación, seguimiento y evaluación<br>• <b>GFPI-F-147:</b> Bitácora quincenal<br>• <b>GFPI-F-165:</b> Aval de alternativa de etapa productiva<br>• <b>GFPI-F-008:</b> Planeación de la evaluación<br>• <b>GFPI-F-009:</b> Juicio evaluativo<br>• <b>GFPI-F-123:</b> Acta de inicio<br><br>📍 Todos los formatos están disponibles en <a href='recursos_etapa_productiva.html' style='color:var(--primary); font-weight:600;'><b>Recursos y Formatos</b></a>."
                     },
                     {
                         keys: ['momento', '6 momento', 'seis momento', 'los 6', 'guia 040', 'momentos'],
@@ -710,11 +697,11 @@
                     },
                     {
                         keys: ['ayuda', 'soporte', 'zendesk', 'problema', 'error'],
-                        response: "<b>🆘 ¿Necesitas ayuda técnica?</b><br><br>• <a href='https://sena.zendesk.com' target='_blank' style='color:var(--accent-cyan)'><b>Zendesk SENA</b></a> - Soporte técnico oficial<br>• <a href='https://www.sena.edu.co' target='_blank' style='color:var(--accent-cyan)'><b>Portal SENA</b></a> - Información general<br>• <a href='https://oferta.senasofiaplus.edu.co' target='_blank' style='color:var(--accent-cyan)'><b>SofiaPlus</b></a> - Plataforma académica<br><br>Si el problema es con tu etapa productiva, contacta directamente a tu <b>instructor de seguimiento</b>."
+                        response: "<b>🆘 ¿Necesitas ayuda técnica?</b><br><br>• <a href='https://sena.zendesk.com' target='_blank' style='color:var(--primary); font-weight:600;'><b>Zendesk SENA</b></a> - Soporte técnico oficial<br>• <a href='https://www.sena.edu.co' target='_blank' style='color:var(--primary); font-weight:600;'><b>Portal SENA</b></a> - Información general<br>• <a href='https://oferta.senasofiaplus.edu.co' target='_blank' style='color:var(--primary); font-weight:600;'><b>SofiaPlus</b></a> - Plataforma académica<br><br>Si el problema es con tu etapa productiva, contacta directamente a tu <b>instructor de seguimiento</b>."
                     },
                     {
                         keys: ['fuente', 'fuentes', 'enlace', 'link', 'web', 'noticias', 'blog'],
-                        response: "<b>🌐 Fuentes Oficiales SENA:</b><br><br>• <a href='https://www.sena.edu.co' target='_blank' style='color:var(--accent-cyan)'><b>Portal SENA</b></a> - Sitio oficial<br>• <a href='https://oferta.senasofiaplus.edu.co' target='_blank' style='color:var(--accent-cyan)'><b>SofiaPlus</b></a> - Gestión académica<br>• <a href='https://sena.zendesk.com' target='_blank' style='color:var(--accent-cyan)'><b>Zendesk SENA</b></a> - Soporte técnico<br>• <a href='https://compromiso.sena.edu.co' target='_blank' style='color:var(--accent-cyan)'><b>Compromiso SENA</b></a> - Sistema de Gestión<br>• <a href='https://blog.sena.edu.co' target='_blank' style='color:var(--accent-cyan)'><b>Blog SENA</b></a> - Noticias<br><br>⚠️ Solo usa fuentes con dominio <b>.edu.co</b> o <b>.gov.co</b> para documentación oficial."
+                        response: "<b>🌐 Fuentes Oficiales SENA:</b><br><br>• <a href='https://www.sena.edu.co' target='_blank' style='color:var(--primary); font-weight:600;'><b>Portal SENA</b></a> - Sitio oficial<br>• <a href='https://oferta.senasofiaplus.edu.co' target='_blank' style='color:var(--primary); font-weight:600;'><b>SofiaPlus</b></a> - Gestión académica<br>• <a href='https://sena.zendesk.com' target='_blank' style='color:var(--primary); font-weight:600;'><b>Zendesk SENA</b></a> - Soporte técnico<br>• <a href='https://compromiso.sena.edu.co' target='_blank' style='color:var(--primary); font-weight:600;'><b>Compromiso SENA</b></a> - Sistema de Gestión<br>• <a href='https://blog.sena.edu.co' target='_blank' style='color:var(--primary); font-weight:600;'><b>Blog SENA</b></a> - Noticias<br><br>⚠️ Solo usa fuentes con dominio <b>.edu.co</b> o <b>.gov.co</b> para documentación oficial."
                     }
                 ];
 
