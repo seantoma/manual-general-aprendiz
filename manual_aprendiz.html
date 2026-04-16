@@ -3163,6 +3163,7 @@
                 console.log('Error compartiendo:', err);
             }
         }
+    </script>
 
     <!-- jsPDF Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -3346,12 +3347,19 @@
             doc.text("CASO MARLON PÉREZ - REFLEXIONES", 20, 135);
             doc.setFontSize(10);
             
-            const a1 = doc.splitTextToSize("1. "¿Si usted es el aprendiz que haría?": " + document.getElementById('caseAns1').value, 170);
+            const q1 = "1. ¿Si usted es el aprendiz que haría?";
+            const a1 = doc.splitTextToSize(q1 + ": " + document.getElementById('caseAns1').value, 170);
             doc.text(a1, 20, 145);
-            const a2 = doc.splitTextToSize("2. "¿En caso de tomar el dinero y no informar que cree que pasaría?": " + document.getElementById('caseAns2').value, 170 + (a1.length * 5));
-            doc.text(a2, 20, 150 + (a1.length * 5));
-            const a3 = doc.splitTextToSize("3. "¿Si la empresa se da cuenta de que usted se quedó con el dinero cuál cree que sería el proceso?": " + document.getElementById('caseAns3').value, 170);
-            doc.text(a3, 20, 155 + (a1.length * 5) + (a2.length * 5));
+            
+            const q2 = "2. ¿En caso de tomar el dinero y no informar que cree que pasaría?";
+            const a2 = doc.splitTextToSize(q2 + ": " + document.getElementById('caseAns2').value, 170);
+            const yOffset2 = 150 + (a1.length * 5);
+            doc.text(a2, 20, yOffset2);
+            
+            const q3 = "3. ¿Si la empresa se da cuenta de que usted se quedó con el dinero cuál cree que sería el proceso?";
+            const a3 = doc.splitTextToSize(q3 + ": " + document.getElementById('caseAns3').value, 170);
+            const yOffset3 = yOffset2 + 5 + (a2.length * 5);
+            doc.text(a3, 20, yOffset3);
 
             doc.save(`Evaluacion_${name.replace(/\s+/g, '_')}.pdf`);
         }
